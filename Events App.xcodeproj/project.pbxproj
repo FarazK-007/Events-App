@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,9 @@
 		C450F5EB28018EC700D34940 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C450F5EA28018EC700D34940 /* DetailViewController.swift */; };
 		C450F5EE2801C76E00D34940 /* SortMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C450F5ED2801C76E00D34940 /* SortMenuViewController.swift */; };
 		C450F5F1280215D500D34940 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C450F5F0280215D500D34940 /* APICaller.swift */; };
+		C4632EC9280297980019B3A4 /* EventDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4632EC8280297980019B3A4 /* EventDetailsResponse.swift */; };
+		C4632ECD2802AA490019B3A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C4632ECC2802AA490019B3A4 /* SDWebImage */; };
+		C4632ECF2802AA490019B3A4 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C4632ECE2802AA490019B3A4 /* SDWebImageMapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,7 @@
 		C450F5EA28018EC700D34940 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C450F5ED2801C76E00D34940 /* SortMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMenuViewController.swift; sourceTree = "<group>"; };
 		C450F5F0280215D500D34940 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		C4632EC8280297980019B3A4 /* EventDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4632ECF2802AA490019B3A4 /* SDWebImageMapKit in Frameworks */,
+				C4632ECD2802AA490019B3A4 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,8 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				C450F5C9280176C000D34940 /* Main.storyboard */,
-				C450F5E5280187E000D34940 /* HomeTableViewCell.swift */,
 				C450F5E6280187E000D34940 /* HomeTableViewCell.xib */,
+				C450F5E5280187E000D34940 /* HomeTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -107,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				C450F5CC280176C000D34940 /* Events_App.xcdatamodeld */,
+				C4632EC8280297980019B3A4 /* EventDetailsResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,6 +143,10 @@
 			dependencies = (
 			);
 			name = "Events App";
+			packageProductDependencies = (
+				C4632ECC2802AA490019B3A4 /* SDWebImage */,
+				C4632ECE2802AA490019B3A4 /* SDWebImageMapKit */,
+			);
 			productName = "Events App";
 			productReference = C450F5C0280176C000D34940 /* Events App.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +174,9 @@
 				Base,
 			);
 			mainGroup = C450F5B7280176C000D34940;
+			packageReferences = (
+				C4632ECB2802AA490019B3A4 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = C450F5C1280176C000D34940 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -195,6 +209,7 @@
 				C450F5E32801870400D34940 /* Constants.swift in Sources */,
 				C450F5CE280176C000D34940 /* Events_App.xcdatamodeld in Sources */,
 				C450F5EE2801C76E00D34940 /* SortMenuViewController.swift in Sources */,
+				C4632EC9280297980019B3A4 /* EventDetailsResponse.swift in Sources */,
 				C450F5F1280215D500D34940 /* APICaller.swift in Sources */,
 				C450F5C8280176C000D34940 /* HomeViewController.swift in Sources */,
 				C450F5C4280176C000D34940 /* AppDelegate.swift in Sources */,
@@ -399,6 +414,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C4632ECB2802AA490019B3A4 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.12.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C4632ECC2802AA490019B3A4 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4632ECB2802AA490019B3A4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		C4632ECE2802AA490019B3A4 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4632ECB2802AA490019B3A4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C450F5CC280176C000D34940 /* Events_App.xcdatamodeld */ = {
