@@ -22,6 +22,8 @@ class HomeTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
 		bgView.dropShadow(color: .black, opacity: 0.5, offSet: CGSize(width: 0, height: 0), radius: 3, scale: false)
+		bgView.layer.cornerRadius = 20
+		eventImageView.layer.cornerRadius = 15
 		
     }
 

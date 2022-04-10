@@ -37,6 +37,9 @@
                                 </state>
                                 <connections>
                                     <action selector="sortButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="caE-ai-1Vy"/>
+                                    <segue destination="F8i-mM-oVj" kind="popoverPresentation" identifier="SortMenuSegue" popoverAnchorView="I3R-di-Gzt" id="J4x-M4-2a3">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lg4-Mg-aLJ">
@@ -483,13 +486,33 @@
         <!--SortMenu-->
         <scene sceneID="dvO-DX-e1a">
             <objects>
-                <viewController storyboardIdentifier="SortMenuVCID" title="SortMenu" id="F8i-mM-oVj" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SortMenuVCID" title="SortMenu" id="F8i-mM-oVj" customClass="SortMenuViewController" customModule="Events_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Ot-jh-1Jj">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ftb-pk-W4q">
-                                <rect key="frame" x="0.0" y="44" width="200" height="156"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tp-t7-slH">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="4ys-SZ-BSQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7az-Js-oJ5">
+                                <rect key="frame" x="15" y="83" width="165" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="WRS-8m-ej0"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="   Favourite">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                    <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ftb-pk-W4q">
+                                <rect key="frame" x="0.0" y="113" width="200" height="187"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sortMenuCell" id="U1T-YM-m2z">
@@ -502,31 +525,43 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tp-t7-slH">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="44"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1jT-XX-A7P">
+                                <rect key="frame" x="10" y="44" width="180" height="32"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <segments>
+                                    <segment title="Ascending"/>
+                                    <segment title="Descending"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cAR-S7-8US"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ftb-pk-W4q" firstAttribute="top" secondItem="2Tp-t7-slH" secondAttribute="bottom" id="0sn-SE-Od2"/>
                             <constraint firstItem="2Tp-t7-slH" firstAttribute="top" secondItem="6Ot-jh-1Jj" secondAttribute="top" id="1Rt-PM-N4i"/>
+                            <constraint firstItem="cAR-S7-8US" firstAttribute="trailing" secondItem="7az-Js-oJ5" secondAttribute="trailing" constant="20" id="4Pl-Xg-hY3"/>
+                            <constraint firstItem="7az-Js-oJ5" firstAttribute="top" secondItem="1jT-XX-A7P" secondAttribute="bottom" constant="8" id="BY7-nO-UHn"/>
+                            <constraint firstItem="1jT-XX-A7P" firstAttribute="leading" secondItem="cAR-S7-8US" secondAttribute="leading" constant="10" id="D3w-Ee-VhN"/>
                             <constraint firstItem="2Tp-t7-slH" firstAttribute="leading" secondItem="6Ot-jh-1Jj" secondAttribute="leading" id="JyJ-fY-TJy"/>
                             <constraint firstItem="ftb-pk-W4q" firstAttribute="bottom" secondItem="cAR-S7-8US" secondAttribute="bottom" id="MRB-3t-6G7"/>
                             <constraint firstAttribute="trailing" secondItem="2Tp-t7-slH" secondAttribute="trailing" id="QZL-3J-MvT"/>
+                            <constraint firstItem="cAR-S7-8US" firstAttribute="trailing" secondItem="1jT-XX-A7P" secondAttribute="trailing" constant="10" id="SiF-gM-XUr"/>
                             <constraint firstItem="ftb-pk-W4q" firstAttribute="leading" secondItem="cAR-S7-8US" secondAttribute="leading" id="VGA-2h-XBU"/>
                             <constraint firstItem="ftb-pk-W4q" firstAttribute="trailing" secondItem="cAR-S7-8US" secondAttribute="trailing" id="X2i-kY-o4P"/>
-                            <constraint firstItem="ftb-pk-W4q" firstAttribute="top" secondItem="cAR-S7-8US" secondAttribute="top" id="pDu-h6-FiE"/>
+                            <constraint firstItem="1jT-XX-A7P" firstAttribute="top" secondItem="2Tp-t7-slH" secondAttribute="bottom" id="dts-lH-yrv"/>
+                            <constraint firstItem="7az-Js-oJ5" firstAttribute="leading" secondItem="cAR-S7-8US" secondAttribute="leading" constant="15" id="nxb-eB-Erf"/>
+                            <constraint firstItem="ftb-pk-W4q" firstAttribute="top" secondItem="7az-Js-oJ5" secondAttribute="bottom" id="uH7-H5-pFk"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="200" height="200"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="300"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="300"/>
+                    <connections>
+                        <outlet property="tableView" destination="ftb-pk-W4q" id="Cqs-SZ-3AU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kR-zO-jX2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="-344"/>
+            <point key="canvasLocation" x="1388" y="-406"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zmw-03-kJE">
@@ -553,6 +588,7 @@
     </scenes>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="line.horizontal.2.decrease.circle" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <namedColor name="backgroundColor">
@@ -569,6 +605,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

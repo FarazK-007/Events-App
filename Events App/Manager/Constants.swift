@@ -27,4 +27,5 @@ struct K {
 	
 	//Segue's
 	static let HomeToPagingSegue = "HomeToPagingSegue"
+	static let SortMenuSegue = "SortMenuSegue"
 }

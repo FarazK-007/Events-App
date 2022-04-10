@@ -9,10 +9,18 @@ import UIKit
 
 class SortMenuViewController: UIViewController {
 
-    override func viewDidLoad() {
+	@IBOutlet weak var tableView: UITableView!
+	
+	let arr = ["Job","Hackathon","Internship","Coding"]
+	
+	override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+		tableView.delegate = self
+		tableView.dataSource = self
+		
+		tableView.separatorStyle = .none
+		
     }
     
 
@@ -26,4 +34,22 @@ class SortMenuViewController: UIViewController {
     }
     */
 
+}
+
+extension SortMenuViewController: UITableViewDelegate, UITableViewDataSource {
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return arr.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: K.sortMenuCell, for: indexPath)
+		cell.imageView?.image = UIImage(systemName: "circle.fill")
+		cell.textLabel!.text = arr[indexPath.row]
+		cell.tintColor = .label
+		return cell
+		
+	}
+	
+	
 }

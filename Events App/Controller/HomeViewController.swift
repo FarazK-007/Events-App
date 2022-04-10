@@ -28,11 +28,11 @@ class HomeViewController: UIViewController {
 		
 		APICaller.shared.getEventDetails { [weak self] (result) in
 			switch result {
-			case .success(let reusltEvents):
+			case .success(let resultEvents):
 				DispatchQueue.main.async {
-					self?.eventDetails = reusltEvents
+					self?.eventDetails = resultEvents
 					self?.tableView.reloadData()
-					print(self?.eventDetails!)
+					self?.totalEventsLabel.text = "TOTAL EVENTS: \(resultEvents.count)"
 				}
 			case .failure(let error):
 				print(error)
@@ -69,4 +69,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 		return cell
 	}
 	
+}
+
+extension HomeViewController: UIPopoverPresentationControllerDelegate {
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == K.SortMenuSegue {
+			let popoverViewController = segue.destination
+			popoverViewController.popoverPresentationController?.delegate = self
+		}
+	}
+	
+	//To force stop the view to show modally
+	func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+		return UIModalPresentationStyle.none
+	}
 }
