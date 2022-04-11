@@ -273,7 +273,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="oui-lT-uJc">
                             <color key="tintColor" name="blue"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="1Gm-gz-ZAA">
+                        <barButtonItem key="rightBarButtonItem" id="1Gm-gz-ZAA">
                             <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
                             <color key="tintColor" name="red"/>
