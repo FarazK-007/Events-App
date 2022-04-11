@@ -23,6 +23,10 @@
 		C4632EC9280297980019B3A4 /* EventDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4632EC8280297980019B3A4 /* EventDetailsResponse.swift */; };
 		C4632ECD2802AA490019B3A4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C4632ECC2802AA490019B3A4 /* SDWebImage */; };
 		C4632ECF2802AA490019B3A4 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C4632ECE2802AA490019B3A4 /* SDWebImageMapKit */; };
+		C4632ED2280322560019B3A4 /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4632ED1280322560019B3A4 /* DetailCollectionViewCell.swift */; };
+		C4632ED5280322E20019B3A4 /* DetailPagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4632ED4280322E20019B3A4 /* DetailPagingViewController.swift */; };
+		C481E1662804432400B07343 /* DataPersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C481E1652804432400B07343 /* DataPersistanceManager.swift */; };
+		C481E1692804516C00B07343 /* ExperienceTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C481E1682804516C00B07343 /* ExperienceTransformer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		C450F5ED2801C76E00D34940 /* SortMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMenuViewController.swift; sourceTree = "<group>"; };
 		C450F5F0280215D500D34940 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		C4632EC8280297980019B3A4 /* EventDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsResponse.swift; sourceTree = "<group>"; };
+		C4632ED1280322560019B3A4 /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		C4632ED4280322E20019B3A4 /* DetailPagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPagingViewController.swift; sourceTree = "<group>"; };
+		C481E1652804432400B07343 /* DataPersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistanceManager.swift; sourceTree = "<group>"; };
+		C481E1682804516C00B07343 /* ExperienceTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceTransformer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +102,7 @@
 			children = (
 				C450F5C7280176C000D34940 /* HomeViewController.swift */,
 				C450F5ED2801C76E00D34940 /* SortMenuViewController.swift */,
+				C4632ED4280322E20019B3A4 /* DetailPagingViewController.swift */,
 				C450F5EA28018EC700D34940 /* DetailViewController.swift */,
 			);
 			path = Controller;
@@ -103,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				C450F5C9280176C000D34940 /* Main.storyboard */,
+				C4632ED1280322560019B3A4 /* DetailCollectionViewCell.swift */,
 				C450F5E6280187E000D34940 /* HomeTableViewCell.xib */,
 				C450F5E5280187E000D34940 /* HomeTableViewCell.swift */,
 			);
@@ -123,6 +133,8 @@
 			children = (
 				C450F5E22801870400D34940 /* Constants.swift */,
 				C450F5F0280215D500D34940 /* APICaller.swift */,
+				C481E1652804432400B07343 /* DataPersistanceManager.swift */,
+				C481E1682804516C00B07343 /* ExperienceTransformer.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -205,15 +217,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4632ED2280322560019B3A4 /* DetailCollectionViewCell.swift in Sources */,
 				C450F5E7280187E000D34940 /* HomeTableViewCell.swift in Sources */,
+				C4632ED5280322E20019B3A4 /* DetailPagingViewController.swift in Sources */,
 				C450F5E32801870400D34940 /* Constants.swift in Sources */,
 				C450F5CE280176C000D34940 /* Events_App.xcdatamodeld in Sources */,
+				C481E1692804516C00B07343 /* ExperienceTransformer.swift in Sources */,
 				C450F5EE2801C76E00D34940 /* SortMenuViewController.swift in Sources */,
 				C4632EC9280297980019B3A4 /* EventDetailsResponse.swift in Sources */,
 				C450F5F1280215D500D34940 /* APICaller.swift in Sources */,
 				C450F5C8280176C000D34940 /* HomeViewController.swift in Sources */,
 				C450F5C4280176C000D34940 /* AppDelegate.swift in Sources */,
 				C450F5C6280176C000D34940 /* SceneDelegate.swift in Sources */,
+				C481E1662804432400B07343 /* DataPersistanceManager.swift in Sources */,
 				C450F5EB28018EC700D34940 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
 	
-	var eventDetails: [EventDetail]?
+	var eventDetails: [EventDetailCoreData] = [EventDetailCoreData]()
 	
 	@IBOutlet weak var searchBar: UISearchBar!
 	@IBOutlet weak var totalEventsLabel: UILabel!
@@ -26,21 +26,22 @@ class HomeViewController: UIViewController {
 		
 		tableView.register(UINib(nibName: K.HomeTableViewCell, bundle: nil), forCellReuseIdentifier: K.HomeTableReusableCell)
 		
-		APICaller.shared.getEventDetails { [weak self] (result) in
+		NotificationCenter.default.addObserver(forName: NSNotification.Name(K.storedToDatabase), object: nil, queue: nil) { [weak self] (_) in
+			self?.fetchDatafromDatabase()
+			self?.totalEventsLabel.text = "TOTAL EVENTS: \(self?.eventDetails.count ?? 0)"
+		}
+	}
+	
+	func fetchDatafromDatabase() {
+		DataPersistenceManager.shared.fetchFromDatabase { [weak self](result) in
 			switch result {
-			case .success(let resultEvents):
-				DispatchQueue.main.async {
-					self?.eventDetails = resultEvents
-					self?.tableView.reloadData()
-					self?.totalEventsLabel.text = "TOTAL EVENTS: \(resultEvents.count)"
-				}
+			case .success(let items):
+				self?.eventDetails = items
+				self?.tableView.reloadData()
 			case .failure(let error):
 				print(error)
 			}
 		}
-		
-		
-		
 	}
 
 	@IBAction func sortButtonTapped(_ sender: UIButton) {
@@ -54,10 +55,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let rows = eventDetails?.count else {
-			return 0
-		}
-		return rows
+		return eventDetails.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,8 +63,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 			return UITableViewCell()
 		}
 		cell.backgroundColor = .clear
-		cell.configure(eventDetail: eventDetails![indexPath.row])
+		cell.configure(eventDetail: eventDetails[indexPath.row])
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		tableView.deselectRow(at: indexPath, animated: true)
+		
+		guard let vc = storyboard?.instantiateViewController(withIdentifier: K.DetailVCwithPaging) as? DetailPagingViewController else {
+			return
+		}
+		vc.configure(model: eventDetails, indexPath: indexPath)
+		self.navigationController?.pushViewController(vc, animated: true)
+		
 	}
 	
 }

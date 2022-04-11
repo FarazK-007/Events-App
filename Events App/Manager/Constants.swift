@@ -19,6 +19,7 @@ struct K {
 	
 	//Nibs
 	static let HomeTableViewCell = "HomeTableViewCell"
+	static let DetailCollectionViewCell = "DetailCollectionViewCell"
 	
 	//VC's
 	static let SortMenuVCID = "SortMenuVCID"
@@ -28,4 +29,16 @@ struct K {
 	//Segue's
 	static let HomeToPagingSegue = "HomeToPagingSegue"
 	static let SortMenuSegue = "SortMenuSegue"
+	
+	//Sort Menu
+	static let Ascending = "Ascending"
+	static let Descending = "Descending"
+	
+	//CoreData
+	static let EventDetailCoreData = "EventDetailCoreData"
+	static let ExperienceTransformer = "ExperienceTransformer"
+	
+	//NotificationCenter
+	static let storedToDatabase = "storedToDatabase"
+	
 }

@@ -36,16 +36,16 @@ class HomeTableViewCell: UITableViewCell {
 		favouriteButton.image = UIImage(systemName: "heart.fill")
 	}
 	
-	func configure(eventDetail: EventDetail) -> Void {
+	func configure(eventDetail: EventDetailCoreData) -> Void {
 		//set image
-		guard let imageURL = URL(string: eventDetail.image) else {
+		guard let imageURL = URL(string: eventDetail.image ?? "") else {
 			return
 		}
 		eventImageView.sd_setImage(with: imageURL, completed: nil)
 		//set title
 		eventTitle.text = eventDetail.name
 		//experience
-		experienceLabel.text = "\(eventDetail.experience.from) - \(eventDetail.experience.to) years"
+		experienceLabel.text = "\(eventDetail.experience?.first ?? 0) - \(eventDetail.experience?.last ?? 0) years"
 		//category
 		categoryLabel.text = eventDetail.category
 		//description

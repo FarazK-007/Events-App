@@ -15,7 +15,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		
+		print("didRun APICall to store to database")
+		apiToDatabase()
+		//print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Events_App.xcdatamodeld"))
+		
 		return true
+	}
+	
+	func apiToDatabase() {
+		APICaller.shared.getEventDetails { (apiResult) in
+			switch apiResult {
+			case .success(let items):
+				DispatchQueue.main.async {
+					DataPersistenceManager.shared.storeToDatabase(result: items) { (databaseResult) in
+						switch databaseResult {
+						case .success():
+							NotificationCenter.default.post(name: NSNotification.Name(K.storedToDatabase), object: nil)
+							print("items added to database")
+						case .failure(let error):
+							print(error)
+						}
+					}
+				}
+			case .failure(let error):
+				print(error)
+			}
+		}
 	}
 
 	// MARK: UISceneSession Lifecycle
@@ -40,7 +66,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	     creates and returns a container, having loaded the store for the
 	     application to it. This property is optional since there are legitimate
 	     error conditions that could cause the creation of the store to fail.
-	    */
+		*/
+		
+		print("did register Transformer")
+		ValueTransformer.setValueTransformer(ExperienceTransformer(), forName: NSValueTransformerName(K.ExperienceTransformer))
+		
 	    let container = NSPersistentContainer(name: "Events_App")
 	    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
 	        if let error = error as NSError? {
