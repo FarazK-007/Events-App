@@ -84,7 +84,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mxa-1R-aQb">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mxa-1R-aQb">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uTG-gl-Tji">
@@ -105,6 +105,18 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="380"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbI-qp-cAT">
+                                                    <rect key="frame" x="330" y="21.5" width="50" height="42.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="tLn-kC-VEl"/>
+                                                        <constraint firstAttribute="height" constant="45" id="yOl-Jp-YV7"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="red"/>
+                                                    <state key="normal" backgroundImage="heart" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="favouriteButtonPressed:" destination="61H-mw-Aoq" eventType="touchUpInside" id="fPC-2A-tQe"/>
+                                                    </connections>
+                                                </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVT-th-vNu">
                                                     <rect key="frame" x="0.0" y="325" width="400" height="451"/>
                                                     <subviews>
@@ -239,8 +251,10 @@
                                             <color key="backgroundColor" name="backgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="TVT-th-vNu" secondAttribute="trailing" id="HWS-r6-6if"/>
+                                                <constraint firstItem="fbI-qp-cAT" firstAttribute="top" secondItem="Yxi-r9-4f4" secondAttribute="top" constant="20" id="Waj-Kl-1MH"/>
                                                 <constraint firstItem="TVT-th-vNu" firstAttribute="top" secondItem="Yxi-r9-4f4" secondAttribute="top" constant="325" id="Woy-oA-A0h"/>
                                                 <constraint firstAttribute="bottom" secondItem="TVT-th-vNu" secondAttribute="bottom" id="Yp9-UA-YpO"/>
+                                                <constraint firstAttribute="trailing" secondItem="fbI-qp-cAT" secondAttribute="trailing" constant="20" id="k8K-Ro-ZJO"/>
                                                 <constraint firstItem="TVT-th-vNu" firstAttribute="leading" secondItem="Yxi-r9-4f4" secondAttribute="leading" id="nsU-YS-Zve"/>
                                             </constraints>
                                         </collectionViewCellContentView>
@@ -252,6 +266,7 @@
                                             <outlet property="ctcLabel" destination="q4a-jn-iBn" id="gVT-K4-HD4"/>
                                             <outlet property="descriptionLabel" destination="UFl-ZD-8aK" id="oW3-gn-Ws7"/>
                                             <outlet property="experienceLabel" destination="ODN-51-FoF" id="fRP-84-vue"/>
+                                            <outlet property="favouriteButton" destination="fbI-qp-cAT" id="aCu-8a-MQc"/>
                                             <outlet property="shareButton" destination="4RH-bX-pRE" id="U9a-2J-Loy"/>
                                             <outlet property="titleImageView" destination="Moz-84-aH8" id="kdY-02-axo"/>
                                             <outlet property="titleNameLabel" destination="l5n-yr-07k" id="PuN-KS-MAd"/>
@@ -272,11 +287,6 @@
                     <navigationItem key="navigationItem" id="Sg3-OW-h2U">
                         <barButtonItem key="backBarButtonItem" title="Back" id="oui-lT-uJc">
                             <color key="tintColor" name="blue"/>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="1Gm-gz-ZAA">
-                            <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
-                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="-2" maxY="0.0"/>
-                            <color key="tintColor" name="red"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -493,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="naw-yx-Qau" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2246" y="69"/>
+            <point key="canvasLocation" x="2936" y="69"/>
         </scene>
         <!--SortMenu-->
         <scene sceneID="dvO-DX-e1a">
@@ -517,12 +527,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WRS-8m-ej0"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Reset">
                                     <color key="titleColor" name="red"/>
                                 </state>
                                 <connections>
-                                    <action selector="favouriteButtonPressed:" destination="F8i-mM-oVj" eventType="touchUpInside" id="N96-xL-kgF"/>
+                                    <action selector="resetButtonPressed:" destination="F8i-mM-oVj" eventType="touchUpInside" id="N96-xL-kgF"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ftb-pk-W4q">
@@ -573,7 +584,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="200" height="300"/>
                     <connections>
-                        <outlet property="sortOrderSedmentControl" destination="1jT-XX-A7P" id="tq4-mi-Ozr"/>
+                        <outlet property="sortOrderSegmentControl" destination="1jT-XX-A7P" id="tq4-mi-Ozr"/>
                         <outlet property="tableView" destination="ftb-pk-W4q" id="Cqs-SZ-3AU"/>
                     </connections>
                 </viewController>

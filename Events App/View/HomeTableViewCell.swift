@@ -8,19 +8,28 @@
 import UIKit
 import SDWebImage
 
+//MARK: - HomeTableViewCell
 class HomeTableViewCell: UITableViewCell {
 	
+	//Intializing Component variables
 	@IBOutlet weak var bgView: UIView!
 	@IBOutlet weak var eventImageView: UIImageView!
 	@IBOutlet weak var eventTitle: UILabel!
 	@IBOutlet weak var experienceLabel: UILabel!
 	@IBOutlet weak var categoryLabel: UILabel!
 	@IBOutlet weak var descriptionLabel: UILabel!
-	@IBOutlet weak var favouriteButton: UIImageView!
+	@IBOutlet weak var favouriteButton: UIButton!
 	
+	//Declaring Variables
+	var model: EventDetailCoreData?
+	var tableView: UITableView?
+	
+	
+	// Initialization code
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+		
+		//Customizing UI
 		bgView.dropShadow(color: .black, opacity: 0.5, offSet: CGSize(width: 0, height: 0), radius: 3, scale: false)
 		bgView.layer.cornerRadius = 20
 		eventImageView.layer.cornerRadius = 15
@@ -32,29 +41,69 @@ class HomeTableViewCell: UITableViewCell {
 
     }
 	
-	override func prepareForReuse() {
-		favouriteButton.image = UIImage(systemName: "heart.fill")
+	//Favourite Button of Collection view, updates Favourite in Database
+	@IBAction func favButtonPressed(_ sender: UIButton) {
+		if model!.favourite {
+			DataPersistenceManager.shared.updateFavouriteInDB(id: Int(model!.id), isFavourite: false) { [weak self] (result) in
+				switch result {
+				case .success(_):
+					self?.tableView?.reloadData()
+				case .failure(let error):
+					print(error)
+				}
+			}
+		} else {
+			DataPersistenceManager.shared.updateFavouriteInDB(id: Int(model!.id), isFavourite: true) { [weak self] (result) in
+				switch result {
+				case .success(_):
+					self?.tableView?.reloadData()
+				case .failure(let error):
+					print(error)
+				}
+			}
+		}
+		
 	}
 	
-	func configure(eventDetail: EventDetailCoreData) -> Void {
-		//set image
+	//Configure Cell
+	func configure(eventDetail: EventDetailCoreData, tableView: UITableView) -> Void {
+		
+		//Initializing variables
+		self.tableView = tableView
+		model = eventDetail
+		
+		//Set Image
 		guard let imageURL = URL(string: eventDetail.image ?? "") else {
 			return
 		}
 		eventImageView.sd_setImage(with: imageURL, completed: nil)
-		//set title
+		
+		//Set Title
 		eventTitle.text = eventDetail.name
-		//experience
+		
+		//Set Experience
 		experienceLabel.text = "\(eventDetail.experience?.first ?? 0) - \(eventDetail.experience?.last ?? 0) years"
-		//category
+		
+		//Set Category
 		categoryLabel.text = eventDetail.category
-		//description
+		
+		//Set Description
 		descriptionLabel.text = eventDetail.eventDetailDescription
+		
+		//Set Favourite Button Image
+		if eventDetail.favourite {
+			favouriteButton.setBackgroundImage(UIImage(systemName: K.imgHeartFill), for: .normal)
+		} else {
+			favouriteButton.setBackgroundImage(UIImage(systemName: K.imgHeartOutline), for: .normal)
+		}
 	}
     
 }
 
+//MARK: - extension UIView - dropShadow
 extension UIView {
+	
+	//Drop shadow for View
 	func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
 		layer.masksToBounds = false
 		layer.shadowColor = color.cgColor
@@ -67,4 +116,5 @@ extension UIView {
 		layer.shouldRasterize = true
 		layer.rasterizationScale = UIScreen.main.scale
 	  }
+	
 }

@@ -25,10 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Release any resources associated with this scene that can be re-created the next time the scene connects.
 		// The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
 		
-		print("Deleted All user defaults")
-		if let appDomain = Bundle.main.bundleIdentifier {
-			UserDefaults.standard.removePersistentDomain(forName: appDomain)
-		}
+		//Code - Deleteing User Defaults as App Terminates
 	}
 
 	func sceneDidBecomeActive(_ scene: UIScene) {

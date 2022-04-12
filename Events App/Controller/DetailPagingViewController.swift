@@ -7,34 +7,43 @@
 
 import UIKit
 
+//MARK: - DetailPagingViewController
 class DetailPagingViewController: UIViewController {
 	
+	//Declaring Variables
 	var eventDetail: [EventDetailCoreData] = [EventDetailCoreData]()
-	var localIndexPath: IndexPath = IndexPath(row: 0, section: 0)
+	var toIndexPath:IndexPath?
 
+	//initilizing UIComponents
 	@IBOutlet weak var detailCollectionView: UICollectionView!
 	
+	//Intialization Code
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		//CollectionView
 		detailCollectionView.delegate = self
 		detailCollectionView.dataSource = self
-		
-        // Do any additional setup after loading the view.
     }
 	
+	//When ViewDidAppear Scroll to specific Index
 	override func viewDidAppear(_ animated: Bool) {
-		detailCollectionView.scrollToItem(at: self.localIndexPath, at: .bottom, animated: true)
+		detailCollectionView.scrollToItem(at: self.toIndexPath!, at: .bottom, animated: true)
 	}
 	
+	//Configuere Self
 	func configure(model: [EventDetailCoreData], indexPath: IndexPath) {
+		
 		eventDetail = model
-		localIndexPath = indexPath
+		toIndexPath = indexPath
 	}
 
 }
 
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension DetailPagingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+	
+	//MARK: - CollectionView DataSource
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return eventDetail.count
 
@@ -44,14 +53,18 @@ extension DetailPagingViewController: UICollectionViewDelegate, UICollectionView
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.PagingCollectionViewCell, for: indexPath) as? DetailCollectionViewCell else {
 			return UICollectionViewCell()
 		}
-		cell.configure(eventDetail: eventDetail[indexPath.row])
+		self.title = eventDetail[indexPath.row].category
+		cell.configure(eventDetail: eventDetail[indexPath.row], vcModel: self, collectionView: collectionView)
 		return cell
 	}
 	
+	//MARK: - CollectionView Flow Layout
+	//Set Cell Size
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
 	}
 	
+	//Customizing Cell for Paging without Sections
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 		return 0
 	}

@@ -7,6 +7,7 @@
 
 import Foundation
 
+//MARK: - Constants
 struct K {
 	
 	//API
@@ -37,8 +38,13 @@ struct K {
 	//CoreData
 	static let EventDetailCoreData = "EventDetailCoreData"
 	static let ExperienceTransformer = "ExperienceTransformer"
+	static let OldItems = "OldItems"
 	
 	//NotificationCenter
 	static let storedToDatabase = "storedToDatabase"
+	static let sortMenuToHome = "sortMenuToHome"
 	
+	//Button
+	static let imgHeartOutline = "heart"
+	static let imgHeartFill = "heart.fill"
 }

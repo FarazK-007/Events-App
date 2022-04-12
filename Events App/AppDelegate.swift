@@ -10,19 +10,37 @@ import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+	
+	//Declaring Variables
+	var oldItems = [OldItems]()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		
+		//Code - Update Core Data with Api as soon as App Starts
 		print("didRun APICall to store to database")
+		deleteDBAndStoreToUserdefaults()
 		apiToDatabase()
-		//print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Events_App.xcdatamodeld"))
+		
+		deleteOldData()
 		
 		return true
 	}
 	
+	//Deleting Whole Data
+	func deleteDBAndStoreToUserdefaults() {
+		DataPersistenceManager.shared.deleteWholeData { (result) in
+			switch result {
+			case .success(let items):
+				self.oldItems = items
+				print("deleted Whole Data")
+			case .failure(let error):
+				print(error)
+			}
+		}
+	}
+	
+	//Getting Latest Data From Api
 	func apiToDatabase() {
 		APICaller.shared.getEventDetails { (apiResult) in
 			switch apiResult {
@@ -32,12 +50,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 						switch databaseResult {
 						case .success():
 							NotificationCenter.default.post(name: NSNotification.Name(K.storedToDatabase), object: nil)
+							self.updateLatestDBWithOldDBAttributes()
 							print("items added to database")
 						case .failure(let error):
 							print(error)
 						}
 					}
 				}
+			case .failure(let error):
+				print(error)
+			}
+		}
+	}
+	
+	//Updating the latest Data
+	func updateLatestDBWithOldDBAttributes() {
+		for item in oldItems {
+			DataPersistenceManager.shared.updateFavouriteInDB(id: Int(item.id), isFavourite: item.favourite ){ (result) in
+				switch result {
+				case .success(_):
+					print("updated")
+				case .failure(let error):
+					print(error)
+				}
+			}
+		}
+	}
+	
+	//Deleting the old Data
+	func deleteOldData() {
+		DataPersistenceManager.shared.deleteWholeDataOfOldItems { (result) in
+			switch result {
+			case .success():
+				break
 			case .failure(let error):
 				print(error)
 			}
